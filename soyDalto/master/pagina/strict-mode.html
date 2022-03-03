@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="html5 Template" />
+    <title>Strict Mode</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/jaiimeriios/html5-Main-Template/master/favicon.ico" />
+    <link href="../../css/normalize.css" rel="stylesheet" media="all" />
+    <link href="../../css/styles.css" rel="stylesheet" media="all" />
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Strict Mode</h1>
+    </div>
+
+    <div class="container">
+    </div>
+
+    <script type="text/javascript">
+
+    "use strict"
+
+        let otroNombre = 'asdf'
+        console.log(otroNombre)
+
+        suma(1, 2)
+        function suma(uno, dos) {
+            console.log(uno + dos)
+        }
+
+        const resta = (tres, cuatro) => {
+            console.log(tres - cuatro)
+        }
+        resta(3, 2)
+
+
+        const objeto = {}
+            Object.defineProperty(objeto, 'nombre', { value: "asdf", writable: false })
+            // objeto.nombre = 'qwer'
+            console.log(objeto)
+
+        const otroObjeto = { nombre: 'qwer'}
+            Object.preventExtensions(otroObjeto)
+            // otroObjeto.appellido = "zxcv"
+            console.log(otroObjeto)
+
+
+        const str = 'estring'
+            // str.canal = 'mas aui'
+            console.log(str)
+
+        const borrar = {
+            este: "borrado"
+        }
+            delete borrar.este
+            console.log(borrar.este)
+
+        function Saludar(){
+            this.nombre = 'nombre por aqui'
+            this.saludo = function(){
+                console.log(`hola ${this.nombre}`)
+            }
+        }
+
+        const ludo = new Saludar()
+        ludo.saludo()
+
+        // octal number
+        console.log(0o21)
+        
+    </script>
+</body>
+
+</html>

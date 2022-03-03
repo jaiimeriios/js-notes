@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="html5 Template" />
+    <title>Memoization</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/jaiimeriios/html5-Main-Template/master/favicon.ico" />
+    <link href="../../css/normalize.css" rel="stylesheet" media="all" />
+    <link href="../../css/styles.css" rel="stylesheet" media="all" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>Memoization</h1>
+    </div>
+
+    <div class="container">
+    </div>
+
+    <script type="text/javascript">
+
+        // https://scotch.io/tutorials/understanding-memoization-in-javascript
+
+        console.log('Memoization')
+
+        const haserAlgo = (num) => {
+            const a = 20;
+            const b = 15;
+            let c = 0;
+            for (let i = num - 1; i >= 0; i--) {
+                for (let j = i - 1; j >= 0; j--) {
+                    c+= a*b
+                }
+            }
+            return c
+        }
+        console.time('Datos Obtenidos en');
+        haserAlgo(50000)
+        console.timeEnd('Datos Obtenidos en');
+        console.time('segunda ronda');
+        haserAlgo(45000)
+        console.timeEnd('segunda ronda');
+
+
+        let cache = []
+        const mmzr = (fn) => {
+            return (e) => {
+                const i = e.toString()
+                if (cache[i] == undefined) {
+                    cache[i] = fn(e)
+                }
+                return cache[i]
+            }
+        }
+        const memo = mmzr(haserAlgo)
+
+        console.time('Memoizer');
+        memo(50000)
+        console.timeEnd('Memoizer');
+        console.time('Memoizer 2');
+        memo(50000)
+        console.timeEnd('Memoizer 2');
+
+
+        // Closures
+        // A closure is the combination of a function and the lexical
+        // environment within which that function was declared
+
+        function foo1(a) {
+            const b = a + 2;
+            function bar1(c) {
+                console.log(a, b, c);
+            }
+            bar1(b * 2);
+        }
+        foo1(3); // 3, 5, 10
+        foo1(5); // 5, 7, 14
+
+        // Closures
+
+        function contador(num) {
+            let i = num;
+            function mostrar() {
+                i++
+                return i
+            }
+
+            return mostrar
+        }
+
+        let resultado = contador(2)
+        console.log('resultado::', resultado())
+        console.log('resultado::', resultado())
+        console.log('resultado::', resultado())
+        console.log('resultado::', resultado())
+
+
+        // console.log('resultado::', contador()) -- no sirver la funcion padre
+
+
+        // Higher-order function: Returning functions from functions
+        // Functions that operate on other functions, either by taking them as arguments or by returning them.
+
+        function foo2() {
+            const a = 2;
+
+            function bar2() {
+                console.log(a);
+            }
+            return bar2;
+        }
+        const baz2 = foo2();
+        baz2(); //2
+
+
+        // Higher-order function:
+        function salir(fn) {
+            console.log('1 salir is haser algo')
+            fn()
+            console.log('3 Siempre no')
+        }
+        function regresarze() {
+            console.log('2 Me regreso a casa')
+        }
+        salir(regresarze)
+
+
+
+        // Fibonacci
+        function fibonacci(n) {
+            if (n <= 1) {
+                return 1
+            }
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+        const fibArr = []
+        for (let i = 0; i <= 11; i++) {
+            fibArr.push(fibonacci(i))
+        }
+        console.log(fibArr)
+
+
+        // Fibonacci Memo
+        function fibonacciMemo(n, memo) {
+            memo = memo || {}
+            if (memo[n]) {
+                return memo[n]
+            }
+            if (n <= 1) {
+                return 1
+            }
+            return memo[n] = fibonacciMemo(n - 1, memo) + fibonacciMemo(n - 2, memo)
+        }
+
+        const fibArrMemo = []
+        for (let i = 0; i <= 11; i++) {
+            fibArrMemo.push(fibonacciMemo(i))
+        }
+        console.log(fibArrMemo)
+    </script>
+</body>
+
+</html>

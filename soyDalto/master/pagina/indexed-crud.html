@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="html5 Template" />
+    <title>Indexed CRUD</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/jaiimeriios/html5-Main-Template/master/favicon.ico" />
+    <link href="../../css/normalize.css" rel="stylesheet" media="all" />
+    <link href="../../css/styles.css" rel="stylesheet" media="all" />
+    <style>
+        .add-nombres {
+            display: flex;
+            margin: 0 auto;
+        }
+
+        .nombres {
+            display: flex;
+            width: 100%;
+            margin: 20px auto;
+            background: #f1f4f7;
+            padding: 5px;
+            flex-wrap: wrap;
+        }
+
+        .nombres .nombre {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            margin: 0 0 10px 0;
+            justify-content: space-between;
+        }
+
+        .imposible {
+            background-color: #c5c5c5;
+            border-color: #a9a9a9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Indexed CRUD</h1>
+    </div>
+
+    <div class="container">
+        <div class="add-nombres">
+            <input type="text" id="nombre">
+            <button id="add">ADD</button>
+        </div>
+        <div class="nombres"></div>
+    </div>
+
+    <script type="text/javascript">
+
+        const nombres = document.querySelector('.nombres')
+        const addBtn = document.querySelector('#add')
+        const inputNombre = document.querySelector('#nombre')
+
+        const nombresMarkup = (id, name) => {
+            const container = document.createElement('div')
+            const heading = document.createElement('h2')
+            const optionsDiv = document.createElement('div')
+            const saveBtn = document.createElement('button')
+            const delBtn = document.createElement('button')
+
+            container.classList.add('nombre')
+            optionsDiv.classList.add('options')
+            saveBtn.classList.add('imposible')
+            delBtn.classList.add('delete')
+
+            heading.textContent = name.nombre
+            saveBtn.textContent = "Guardar"
+            delBtn.textContent = "Eliminar"
+
+            heading.setAttribute('contenteditable', 'true')
+            heading.setAttribute('spellcheck', 'false')
+
+            optionsDiv.appendChild(saveBtn)
+            optionsDiv.appendChild(delBtn)
+            container.appendChild(heading)
+            container.appendChild(optionsDiv)
+
+            heading.addEventListener('keyup', () => {
+                saveBtn.classList.replace('imposible', 'posible')
+            })
+            saveBtn.addEventListener('click', () => {
+                modificarObjeto(id, { nombre: heading.textContent })
+                saveBtn.classList.replace('posible', 'imposible')
+            })
+            delBtn.addEventListener('click', () => {
+                deleteObjeto(id)
+                nombres.removeChild(container)
+            })
+
+            return container
+        }
+
+        addBtn.addEventListener('click', () => {
+            const nombre = inputNombre.value
+            if (nombre.length > 0) {
+
+                if (document.querySelector('.posible') != undefined) {
+                    if (confirm('seguro?')) {
+                        inputNombre.value = ''
+                        addObjeto({ nombre })
+                        leerObjeto()
+                    }
+                } else {
+                    inputNombre.value = ''
+                    addObjeto({ nombre })
+                    leerObjeto()
+                }
+            }
+        })
+
+
+        // creando indexedDB
+        const IDBrequest = indexedDB.open("CRUD", 1)
+
+        IDBrequest.addEventListener('upgradeneeded', () => {
+            console.log("Se creo si no existe")
+            const db = IDBrequest.result
+            db.createObjectStore("baseDatosCRUD", {
+                autoIncrement: true
+            })
+        })
+        IDBrequest.addEventListener('success', () => {
+            console.log("Resultado::", IDBrequest)
+            leerObjeto()
+        })
+        IDBrequest.addEventListener('error', () => {
+            console.log("no sirve")
+        })
+
+
+        // creando indexedDB requerimientos
+        const getIDBdata = (modo, msg) => {
+            const db = IDBrequest.result
+            const IDBtransaction = db.transaction('baseDatosCRUD', modo)
+            const objectStore = IDBtransaction.objectStore('baseDatosCRUD')
+
+            IDBtransaction.addEventListener('complete', () => {
+                console.log(msg)
+            })
+            return objectStore
+        }
+
+        // creando indexedDB funciones
+        const addObjeto = (objeto) => {
+            const IDBdata = getIDBdata('readwrite', `${objeto} agrgado`)
+            IDBdata.add(objeto)
+
+        }
+        const modificarObjeto = (key, objeto) => {
+            const IDBdata = getIDBdata('readwrite', `${objeto} modificado`)
+            IDBdata.put(objeto, key)
+        }
+        const deleteObjeto = (key) => {
+            const IDBdata = getIDBdata('readwrite', `${key} borrado`)
+            IDBdata.delete(key)
+
+        }
+        const leerObjeto = () => {
+            const IDBdata = getIDBdata('readonly')
+            const cursor = IDBdata.openCursor()
+            const fragment = document.createDocumentFragment()
+            nombres.innerHTML = ''
+            cursor.addEventListener('success', () => {
+                if (cursor.result) {
+                    let elemento = nombresMarkup(cursor.result.key, cursor.result.value)
+                    fragment.appendChild(elemento)
+                    console.log(nombres)
+                    cursor.result.continue()
+                } else {
+                    nombres.appendChild(fragment)
+                    console.log('Ya se leyeron los datos')
+                }
+            })
+        }
+
+    </script>
+</body>
+
+</html>

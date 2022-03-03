@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="html5 Template" />
+    <title>Web Workers</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/jaiimeriios/html5-Main-Template/master/favicon.ico" />
+    <link href="../../css/normalize.css" rel="stylesheet" media="all" />
+    <link href="../../css/styles.css" rel="stylesheet" media="all" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>Web Workers</h1>
+    </div>
+
+    <div class="container">
+        <div>
+            <form>
+                <div>
+                    <label for="number1">Multiply number 1: </label>
+                    <input type="number" id="number1" value="0">
+                </div>
+                <div>
+                    <label for="number2">Multiply number 2: </label>
+                    <input type="number" id="number2" value="0">
+                </div>
+            </form>
+            <p class="result">Result: 0</p>
+        </div>
+
+        <div>
+            <div>
+                <button class="loop">blucle</button>
+            </div>
+            <div>
+                <label for="">texto</label>
+                <input type="text" name="" id="">
+                <button class="boton">agarrar</button>
+                <div class="load-result"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+
+
+        const wrkr = new Worker('worker.js')
+
+        const boton = document.querySelector('.boton')
+
+        document.querySelector('.loop').addEventListener('click', () => mandarMensage())
+        const mandarMensage = () => {
+            wrkr.postMessage("🔥 mensage mandado al trabajador")
+        }
+
+        wrkr.addEventListener('message', (e) => {
+            console.log("⭕", e.data)
+        })
+
+        const cargarData = async (div) => {
+            const req = await fetch('http://jsonplaceholder.typicode.com/posts')
+            const res = await req.text()
+            const arr = res
+            document.querySelector(div).innerHTML = res
+        }
+
+        boton.addEventListener('click', () => {
+            console.log('asdfdsa')
+            cargarData('.load-result')
+        })
+
+
+
+        // Multiplicacion
+    
+        const first = document.querySelector('#number1');
+        const second = document.querySelector('#number2');
+        const result = document.querySelector('.result');
+
+        if (window.Worker) {
+            const myWorker = new Worker('worker-multiply.js');
+
+            first.onchange = function () {
+                myWorker.postMessage([first.value, second.value]);
+                console.log('Message posted to worker');
+            }
+            second.onchange = function () {
+                myWorker.postMessage([first.value, second.value]);
+                console.log('Message posted to worker');
+            }
+            myWorker.onmessage = function (e) {
+                result.textContent = e.data;
+                console.log('Message received from worker');
+            }
+        } else {
+            console.log('Your browser doesn\'t support web workers.');
+        }
+        
+    </script>
+</body>
+
+</html>

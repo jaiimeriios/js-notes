@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="html5 Template" />
+    <title>HTTP Request Callback</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/jaiimeriios/html5-Main-Template/master/favicon.ico" />
+    <link href="../styles.css" rel="stylesheet" media="all" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>HTTP Request Callback</h1>
+    </div>
+
+    <script>
+
+        const getTodos = (callback) => {
+            const request = new XMLHttpRequest()
+            const URL = 'https://jsonplaceholder.typicode.com'
+
+            request.open('GET', `${URL}/todos`)
+            request.send()
+
+            request.addEventListener('readystatechange', () => {
+                if (request.readyState === 4 && request.status === 200) {
+                    callback(undefined, request.responseText)
+                } else if (request.readyState === 4) {
+                    callback('Could not fetch data', undefined)
+                }
+            })
+        }
+
+        console.log('1')
+        console.log('2')
+
+        getTodos((err, data) => {
+            console.warn('callback fired')
+            if(err){
+                console.log(err)
+            } else {
+                console.log(data)
+            }
+        })
+
+        console.log('3')
+        console.log('4')
+
+
+
+    </script>
+</body>
+
+</html>

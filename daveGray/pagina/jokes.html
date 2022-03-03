@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="html5 Template" />
+    <title>Jokes Async&Await</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/jaiimeriios/html5-Main-Template/master/favicon.ico" />
+    <link href="../css/normalize.css" rel="stylesheet" media="all" />
+    <link href="../css/styles.css" rel="stylesheet" media="all" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>Jokes Async & Await</h1>
+    </div>
+
+    <div class="container">
+        <form>
+            <div>
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" value="Chuck">
+            </div>
+            <div>
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" value="Norris">
+            </div>
+            <div>
+                <label for="category">Category</label>
+                <select name="category" id="category">
+                    <option value="nerdy">Nerdy</option>
+                    <option value="explicit">Explicit</option>
+                    <option value="nerdy, explicit">Nerdy & Explicit</option>
+
+                </select>
+            </div>
+            <button type="submit" id="submit">Get Joke</button>
+        </form>
+
+        <div>
+            <p id="joke"></p>
+        </div>
+    </div>
+
+
+    <script>
+
+        const submitBtn = document.getElementById("submit");
+        const texto = document.getElementById("joke");
+
+        const firstName = document.getElementById("first-name")
+        const lastName = document.getElementById("last-name")
+        const category = document.getElementById("category")
+
+        submitBtn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            texto.innerHTML = await requestChisteRequest()
+        });
+
+
+        const getDataFromForm = (fisrt, last, category) => {
+            const requestObject = {
+                firstNmae: fisrt,
+                lastName: last,
+                categories: [`${category}`]
+            }
+            return requestObject
+        }
+
+        const buildRequestUrl = (requestData) => {
+            return `https://api.icndb.com/jokes/random?firstName=${requestData.firstNmae}&lastName=${requestData.lastName}&limitTo=${requestData.categories}`
+        }
+
+        const chiste = async (url) => {
+            const respuesta = await fetch(url)
+            const data = await respuesta.json()
+            const chistesillo = data.value.joke
+            return chistesillo
+        }
+
+
+        // Procedural "Workflow" function
+        const requestChisteRequest = async () => {
+            const requestData = getDataFromForm(firstName.value, lastName.value, category.value)
+            console.log(requestData)
+            const requestURL = buildRequestUrl(requestData)
+            const joke = await chiste(requestURL)
+            return joke
+        }
+
+
+    </script>
+</body>
+
+</html>

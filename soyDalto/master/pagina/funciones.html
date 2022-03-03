@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="html5 Template" />
+    <title>Funciones</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/jaiimeriios/html5-Main-Template/master/favicon.ico" />
+    <link href="../../css/normalize.css" rel="stylesheet" media="all" />
+    <link href="../../css/styles.css" rel="stylesheet" media="all" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>Funciones</h1>
+    </div>
+
+    <div class="container">
+        <div>
+            <div>
+                <button type="button" class="boton-16">16 px</button>
+                <button type="button" class="boton-18">18 px</button>
+                <button type="button" class="boton-20">20 px</button>
+            </div>
+            <p class="lorem-text">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate cumque doloremque rem incidunt ad facilis earum voluptatem magnam suscipit soluta, porro eaque quae molestias voluptates veniam saepe nihil tempora repellat.
+            </p>
+        </div>
+
+        <div>
+            <div>
+                <button type="button" class="boton2-16">16 px</button>
+                <button type="button" class="boton2-18">18 px</button>
+                <button type="button" class="boton2-20">20 px</button>
+            </div>
+            <p class="lorem-text-2">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate cumque doloremque rem incidunt ad facilis earum voluptatem magnam suscipit soluta, porro eaque quae molestias voluptates veniam saepe nihil tempora repellat.
+            </p>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+
+        const saludar = () => {
+            console.log('hola')
+        }
+        saludar()
+
+        const saludar2 = (asdf) => {
+            return `regresar algo ${asdf}`
+        }
+        const resultad = saludar2('🔥')
+        console.log(resultad)
+
+        const objeto = {
+            nombre: "📦",
+            saludar: function () {
+                console.log(`saludo ${this.nombre}`)
+            }
+        }
+        objeto.saludar()
+
+        const objetoThis = {
+            nombre: "📉",
+            saludar: () => {
+                console.log(`saludo ${this.nombre}`)
+            }
+        }
+        objetoThis.saludar()
+
+
+        function constructorPersona1(nombre, edad) {
+            this.nombre = nombre
+            this.edad = edad
+            console.log(`${this.nombre} ${this.edad}`)
+        }
+
+            constructorPersona1("funcion", "llamada directa")
+            const persona1 = new constructorPersona1('funcion', "constructor")
+            console.log(persona1)
+
+        const constructorPersona2 = (nombre, edad) => {
+            this.nombre = nombre
+            this.edad = edad
+        }
+            // flechas no sirve para constructor
+            // const persona2 = new constructorPersona2('nombre', 3)
+            // console.log(persona2)
+
+
+        console.log(this)
+
+
+
+        const objetoUsandoThis = {
+            esto: 'este es el THIS',
+            usandoThis 
+        }
+
+        objetoUsandoThis.usandoThis()
+
+        // no sirve con flechas
+        // const usandoThis = () => {
+        function usandoThis(){
+            console.log(`usando this:: ${this.esto}`)
+        }
+
+        usandoThis() // this no sirve en funciones
+        
+
+        
+
+        const afuera = {
+            esteManda: "este manda",
+            decirHola: function() {
+                console.log(`dice hola: ${this.esteManda} `)
+            }
+        }
+        afuera.decirHola()
+
+        function agarrarHola() {
+            esteManda = 'no va a salir este'
+            afuera.decirHola()
+        }
+        agarrarHola()
+
+         
+
+        const afueraFlecha = {
+            esteMandaFlecha: "este manda",
+            decirHola: () => {
+                console.log(`con flecha: ${this.esteMandaFlecha} `)
+            }
+        }
+        afueraFlecha.decirHola() //esta agarrando a Window
+
+        function agarrarHolaFlecha() {
+            esteMandaFlecha = 'aqui se reescribe🎨'
+            afueraFlecha.decirHola()
+        }
+        agarrarHolaFlecha()
+
+
+
+
+        const textLorem = document.querySelector('.lorem-text')
+        const boton16 = document.querySelector(".boton-16")
+        const boton18 = document.querySelector(".boton-18")
+        const boton20 = document.querySelector(".boton-20")
+
+        const canbiarTexto = (size) => {
+            textLorem.style.marginTop = `${size}px`
+            textLorem.style.fontSize = `${size}px`
+        }
+          boton16.addEventListener('click', () =>  { canbiarTexto('16')})
+          boton18.addEventListener('click', () =>  { canbiarTexto('18')})
+          boton20.addEventListener('click', () =>  { canbiarTexto('20')})
+
+
+
+        const textLorem2 = document.querySelector('.lorem-text-2')
+        const boton16_2 = document.querySelector(".boton2-16")
+        const boton18_2 = document.querySelector(".boton2-18")
+        const boton20_2 = document.querySelector(".boton2-20")
+
+        // Clauslas
+        const canbiarTextoClausula = (size) => {
+            return () => {
+                textLorem2.style.marginTop = `${size}px`
+                textLorem2.style.fontSize = `${size}px`
+            }
+        }
+
+            px16_2 = canbiarTextoClausula(16)
+            px18_2 = canbiarTextoClausula(18)
+
+            boton16_2.addEventListener('click', px16_2)
+            boton18_2.addEventListener('click', px18_2)
+            boton20_2.addEventListener('click', canbiarTextoClausula(20))
+
+
+
+
+        const suma = (a, b) => {
+            console.log(a + b)
+        }
+            suma(10)
+        
+        const resta = (a = 15, b = 5) => {
+            console.log(a - b)
+        }
+            resta(10)
+
+        const adicion = (parametroPrevio, otro, ...loQueSeaAqui) => {
+            let resultado = 0
+            for (let i = 0; i < loQueSeaAqui.length; i++) {
+                resultado += loQueSeaAqui[i]
+            }
+            console.log(parametroPrevio, otro, resultado)
+        }
+        adicion("parametroPrevio", "otro aqui", 3,5,19,90)
+
+
+        
+        // check the age to determine the eligibility to vote
+        let age = 15;
+        let result;
+
+        if (age >= 18) {
+            result = "simon.";
+        } else {
+            result = "NEL 😒";
+        }
+            console.log(result);
+
+                
+        result = (age >= 18) ? "esto no sale" : "Ternario NO ❓";
+            console.log(result);
+
+
+        // nest one ternary operator as an expression inside another ternary operator
+        let a = 3;
+        let positividad = (a >= 0) ? (a == 0 ? "zero" : "positive") : "negative";
+        console.log(`The number is ${positividad}.`);
+
+
+
+
+        //Spread Operator
+        const v1 = "valor 1"
+        const v2 = "valor 2"
+        const v3 = "valor 3"
+        const vArr = ["valor 1", "valor 2", "valor 3"]
+            console.log(v1, v2, v3);
+            console.log(vArr);
+            console.log(...vArr);
+
+
+        let arr = [1,2,3];
+        let arr2 = [4,5];
+            console.log("arrays juntados", arr, arr2);
+            arr = [...arr,...arr2];
+            console.log("spread operator", arr);
+
+
+
+        let pushArr = ['a','b','c'];
+        let pushArr2 = pushArr;
+            pushArr2.push('d');
+            console.log("con push", pushArr2);
+            console.log("con push", pushArr);
+
+
+        let pushSpreadArr = ['a','b','c'];
+        let pushSpreadArr2 = [...pushSpreadArr];
+        
+        console.log("push spread", pushSpreadArr);
+        
+        pushSpreadArr2.push('d');
+        
+        console.log("push spread", pushSpreadArr2);
+        console.log("push spread", pushSpreadArr); 
+
+
+        // https://www.geeksforgeeks.org/javascript-rest-operator/
+
+        // Without rest parameter
+        function fun(a, b){
+            return a + b;
+        }
+        console.log(fun(1, 2));
+        console.log(fun(1, 2, 3, 4, 5)); 
+
+
+        // rest parameter
+        function fun2(...input){
+            let sum = 0;
+            for(let i of input){
+                sum+=i;
+            }
+            return sum;
+        }
+        console.log(fun2(1,2)); //3
+        console.log(fun2(1,2,3)); //6
+        console.log(fun2(1,2,3,4,5)); //15    
+
+    </script>
+</body>
+
+</html>

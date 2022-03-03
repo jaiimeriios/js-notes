@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="html5 Template" />
+    <title>Cache</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/jaiimeriios/html5-Main-Template/master/favicon.ico" />
+    <link href="../../css/normalize.css" rel="stylesheet" media="all" />
+    <link href="../../css/styles.css" rel="stylesheet" media="all" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>Cache</h1>
+    </div>
+
+    <div class="container">
+        <p>Caheando Datos</p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam cum quidem veniam eveniet eius explicabo modi
+            dolorem debitis nostrum iste deserunt qui laboriosam libero eligendi, laudantium sit, hic error. Quas.
+        </p>
+
+    </div>
+
+    <script type="text/javascript">
+
+        caches.open("archivos-estaticos-1").then((cache) => {
+            cache.addAll(["cache.html", "navigator.html"])
+            console.log(cache)
+        })
+        caches.open("archivos-estaticos-1").then((cache) => {
+            cache.match("cache.html").then((file) => {
+                console.log(file)
+            })
+        })
+        caches.open("archivos-estaticos-1").then((cache) => {
+            cache.keys().then((llaves) => {
+                console.log(llaves)
+            })
+        })
+
+
+        caches.open("archivos-estaticos-2").then((cache) => {
+
+            // lo mismo que cache.add()
+            // cache.add("cache.html")
+
+            fetch("cache.html").then((res) => {
+                cache.put("cache.html", res)
+            })
+        })
+
+
+        caches.open("archivos-estaticos-3").then((cache) => {
+            cache.add("cache.html")
+        })
+        caches.open("archivos-estaticos-3").then((cache) => {
+            cache.delete("cache.html").then((cache) => {
+                console.log('borrado')
+            })
+        })
+
+    </script>
+</body>
+
+</html>

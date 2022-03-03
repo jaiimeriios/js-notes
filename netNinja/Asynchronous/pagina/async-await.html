@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="html5 Template" />
+    <title>Async Await</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/jaiimeriios/html5-Main-Template/master/favicon.ico" />
+    <link href="../styles.css" rel="stylesheet" media="all" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>Async Await</h1>
+    </div>
+
+    <script>
+
+        /*
+        // fetch example
+        fetch('todos.json').then((response) => {
+            return response.json()
+        }).then((data) => {
+            console.log(data)
+        }).catch((error) => {
+            console.log(error)
+        })
+        */
+
+        const getTodos = async () => {                      // async function always returns promises
+            const response = await fetch('todos.json')      // wait to resolve
+            const data = await response.json()              // retuned promise, await resolves and asign data
+            const response1 = await fetch('todos1.json')
+            const data1 = await response1.json()
+            const response2 = await fetch('todos2.json')
+            const data2 = await response2.json()
+            return {data, data1, data2}
+        }
+
+        console.log('1')
+        console.log('2')
+        getTodos().then((datos) => {
+            console.log(datos.data)
+        }).catch((error) => {
+            console.log(error.message)
+        })
+        console.log('3')
+        console.log('4')
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

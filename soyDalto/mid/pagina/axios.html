@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="html5 Template" />
+    <title>AXIOS</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/jaiimeriios/html5-Main-Template/master/favicon.ico" />
+    <link href="../../css/normalize.css" rel="stylesheet" media="all" />
+    <link href="../../css/styles.css" rel="stylesheet" media="all" />
+
+
+    <style>
+        .container {
+            justify-content: flex-start;
+        }
+
+        #contenedor>div {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            /* flex: 1; */
+            width: 170px;
+            padding: 10px 0;
+            background: #f1f4f7;
+            border-radius: 6px;
+            margin: 6px;
+            transition: all 200ms ease-in-out;
+        }
+
+        #contenedor>div:hover {
+            background-color: var(--primary-color);
+            color: #ccd4ff;
+        }
+
+        #contenedor>div:hover p:nth-child(2) {
+            color: #fff;
+        }
+
+        #contenedor>div img {
+            border-radius: 50%;
+            max-width: 60px;
+            min-width: 50px;
+        }
+
+        #contenedor>div p:nth-child(2) {
+            font-size: .85rem;
+            margin: 10px 0 3px 0;
+            font-weight: 600;
+            color: var(--primary-color)
+        }
+
+        #contenedor>div p:nth-child(3) {
+            font-size: .85rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>AXIOS</h1>
+    </div>
+
+    <div class="container" id="contenedor">
+
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+
+        const contenedor = document.querySelector('#contenedor')
+        const url = 'https://reqres.in/api/users'
+
+        axios(url)
+            .then((response) => {
+
+                console.log('axios get::', response.data)
+                const data = response.data.data
+
+                data.forEach(data => {
+
+                    const div = document.createElement('div')
+                    const img = document.createElement('img')
+                    const p = document.createElement('p')
+                    const email = document.createElement('p')
+
+                    img.src = `${data.avatar}`
+                    p.innerHTML = `${data.first_name} ${data.last_name}`
+                    email.innerHTML = `${data.email}`
+
+                    div.insertAdjacentElement('beforeend', img)
+                    div.insertAdjacentElement('beforeend', p)
+                    div.insertAdjacentElement('beforeend', email)
+
+                    contenedor.insertAdjacentElement('afterbegin', div)
+                });
+            })
+
+
+
+
+        axios.post(url, {
+            "nombre": "asdf",
+            "erbmon": "qwer",
+        })
+            .then((response) => {
+                console.log('axios POST::', response.data)
+            })
+
+
+
+        axios(url, {
+            method: "post",
+            data: {
+                "nombre": "zxcv",
+                "numeros": "1234",
+            }
+        })
+            .then((response) => {
+                console.log('axios POST::', response.data)
+            })
+
+
+
+
+    </script>
+</body>
+
+</html>

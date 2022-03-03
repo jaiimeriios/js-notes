@@ -1,0 +1,139 @@
+/* ---------------------------------------------------------
+  HTML5 Main Template
+---------------------------------------------------------*/
+
+:root {
+    --primary-color: #475ac5;
+    --secondary-color: #8e9fde;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: "Noto Sans JP", sans-serif;
+    background-color: #f1f4f7;
+    scroll-behavior: smooth;
+}
+
+/* Link styling */
+a {
+    color: #0cc;
+}
+a:link {
+    color: #078bcc;
+}
+a:visited {
+    color: #bd02fb;
+}
+a:hover,
+a:focus {
+    color: #000;
+}
+a:active {
+    color: #fb0e02;
+}
+
+.wrap {
+    max-width: 960px;
+    height: auto;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.container {
+    width: 94%;
+    max-width: 960px;
+    height: auto;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.container .section {
+    border: solid 2px #cecece;
+    padding: 1rem;
+    border-radius: 3px;
+    width: 45%;
+    margin: 0 0 1rem 0;
+}
+.container .section input {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#inputNumber {
+    color: #0871c3;
+    font-weight: 500;
+}
+input#mainInput,
+input.numInput,
+input.fillInput {
+    display: block;
+    margin: 0 0 3px 0;
+    outline: none;
+}
+
+p.parrafo {
+    display: inline;
+    text-align: center;
+    margin: 0 6px;
+    font-size: 1.5rem;
+}
+
+p.parrafo:hover {
+    cursor: pointer;
+}
+
+p.numero {
+    display: inline-block;
+    font-size: 2rem;
+    margin: 0 5px;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+button {
+    padding: 0.3rem 0.5rem;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 0.8rem;
+    line-height: 1;
+    background-color: #3198e8;
+    border: solid 1px #1184de;
+}
+
+button:hover {
+    background-color: #1c85d4;
+}
+
+button:focus {
+    outline: none;
+}
+
+a,
+a:visited {
+    color: #0871c3;
+}
+
+h1 {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    text-align: center;
+}

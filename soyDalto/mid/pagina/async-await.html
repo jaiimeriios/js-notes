@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="html5 Template" />
+    <title>Async Await</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/jaiimeriios/html5-Main-Template/master/favicon.ico" />
+    <link href="../../css/normalize.css" rel="stylesheet" media="all" />
+    <link href="../../css/styles.css" rel="stylesheet" media="all" />
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Async Await</h1>
+    </div>
+
+    <div class="container"></div>
+
+    <script type="text/javascript">
+    const objeto = {
+        propiedad1: 'valor1',
+        propiedad2: 'valor2',
+        propiedad3: 'valor3',
+        propiedad4: 'valor4'
+    }
+
+    const obtenerInformacion = () => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {resolve(objeto)}, 1000)
+        })
+    }
+
+    const mostrarResultado = async () => {
+        resultado = await obtenerInformacion()
+        console.log(resultado);
+    }
+
+    mostrarResultado()
+        // async function mostrarResultado2() {
+        //     resultado = await obtenerInformacion()
+        //     console.log(resultado);
+        // }
+        // mostrarResultado2()
+
+    const obtenerInformacion2 = (texto) => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {resolve(texto)}, 1500)
+        })
+    }
+
+    const mostrarDatos = async () => {
+
+        data1 = await obtenerInformacion2('1: asdf asdf')
+        data2 = await obtenerInformacion2('2: asdf asdf')
+        data3 = await obtenerInformacion2('3: zxcv zxcv')
+
+        console.log(data1)
+        console.log(data2)
+        console.log(data3)
+    }
+    mostrarDatos()
+    
+    
+    </script>
+</body>
+
+</html>

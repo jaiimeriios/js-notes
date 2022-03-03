@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="html5 Template" />
+    <title>Flujo</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/jaiimeriios/html5-Main-Template/master/favicon.ico" />
+    <link href="../../css/normalize.css" rel="stylesheet" media="all" />
+    <link href="../../css/styles.css" rel="stylesheet" media="all" />
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Flujo</h1>
+    </div>
+
+    <div class="container">
+        <select name="" id="fruta">
+            <option>select option</option>
+            <option value="banana">banana</option>
+            <option value="pera">pera</option>
+            <option value="manzana">manzana</option>
+        </select>
+    </div>
+
+    <script type="text/javascript">
+    // bloques
+    let asdf = 'asdf';
+    {
+        let asdf = 'qwer';
+        console.log(asdf);
+        {
+            let asdf = 'zxcv';
+            console.log(asdf);
+        }
+    }
+    console.log(asdf);
+
+
+    // if & switch
+    const fruta = document.getElementById('fruta');
+
+    fruta.addEventListener('change', function () {
+        let expr = this.value;
+        checkSwitch(expr);
+        checkIf(expr);
+    });
+
+        function checkIf(expr) {
+            if (expr == 'banana') {
+                console.log('if:: banana');
+            } else if (expr == 'pera') {
+                console.log('if:: pera');
+            } else if (expr == 'manzana') {
+                console.log('if:: manzana');
+            } else {
+                console.log('if:: nel');
+            }
+        }
+
+        function checkSwitch(expr) {
+            switch (expr) {
+                case 'banana':
+                    console.log('switch:: banana');
+                    break;
+                case 'pera':
+                    console.log('switch:: pera');
+                    break;
+                case 'manzana':
+                    console.log('switch:: manzana');
+                    break;
+                default:
+                    console.log('switch:: nada');
+                    break;
+            }
+        }
+
+
+    // try catch
+
+    try {
+        variableNoDefinida
+    } catch(error) {
+        console.error(error)
+    }
+
+
+    try {
+        ASDFNoDefinido
+    } catch(error) {
+        if (3 > 1) {
+            console.error(error)
+        } else {
+            console.log('ASDF')
+        }
+
+    }
+
+
+    try {
+        variabeNoDefinida
+    } catch(error) {
+        console.error(`AQUI ES ERROR ${error}`)
+    } finally {
+        console.log('Se ejecta pase lo que pase')
+    }
+
+    const pruebaTry = () => {
+        try {
+            return 1
+        } catch(e) {
+            return 2
+        } finally {
+            return 3
+        }
+    }
+
+    console.log(pruebaTry())
+
+    try {
+        throw {
+            error: 'CUAL error es?',
+            info: 'infomrmacion del error'
+        }
+    } catch(e) {
+        console.log(e.error)
+        console.log(e.info)
+    } finally {
+        console.log('finalmente?')
+    }
+    
+    </script>
+</body>
+
+</html>

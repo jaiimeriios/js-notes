@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="html5 Template" />
+    <title>HTTP Request</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/jaiimeriios/html5-Main-Template/master/favicon.ico" />
+    <link href="../styles.css" rel="stylesheet" media="all" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>HTTP Request</h1>
+    </div>
+    <div class="container">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Value</th>
+                    <th>State</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0</td>
+                    <td>UNSENT</td>
+                    <td>Client has been created. open() not called yet.</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>OPENED</td>
+                    <td>open() has been called.</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>HEADERS_RECEIVED</td>
+                    <td>send() has been called, and headers and status are available.</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>LOADING</td>
+                    <td>Downloading; responseText holds partial data.</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>DONE</td>
+                    <td>The operation is complete.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+
+        const request = new XMLHttpRequest()
+        const URL = 'https://jsonplaceholder.typicode.com'
+
+        request.open('GET', `${URL}/todos`)                             // get data from - setting request
+        request.send()                                                  // send request
+
+        request.addEventListener('readystatechange', () => {            // fires everytime there a state change on the request
+            console.log(request.readyState, request)
+            if (request.readyState === 4 && request.status === 200) {   // fires only when Done and ok response
+                // console.log(request.responseText)
+                console.log('Respuesta 📄')
+            }
+        })
+
+
+
+        // Fallando aproposito
+        const request2 = new XMLHttpRequest()
+        const URL2 = 'https://jsonplaceholder.typicode.com'
+
+        request2.open('GET', `${URL}/todosssssss`)                      // mal URL
+        request2.send()
+
+        request2.addEventListener('readystatechange', () => {
+
+            if (request2.readyState === 4 && request2.status === 200) {
+                console.log(request2.responseText)                      // esto no pasa
+            } else if (request2.readyState === 4) {
+                console.log('Si esta algo malo 🚫')                     // regresa esto
+            }
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>

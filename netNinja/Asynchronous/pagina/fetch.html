@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="html5 Template" />
+    <title>Fetch API</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/jaiimeriios/html5-Main-Template/master/favicon.ico" />
+    <link href="../styles.css" rel="stylesheet" media="all" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>Fetch API</h1>
+    </div>
+
+    <script>
+
+        fetch('todos.json').then((response) => {
+            return response.json()
+        }).then((data) => {
+            console.log(data)
+        }).catch((error) => {
+            console.log(error)
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="html5 Template" />
+    <title>Prototipos</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/jaiimeriios/html5-Main-Template/master/favicon.ico" />
+    <link href="../../css/normalize.css" rel="stylesheet" media="all" />
+    <link href="../../css/styles.css" rel="stylesheet" media="all" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>Prototipos</h1>
+    </div>
+
+    <div class="container">
+    </div>
+
+    <script type="text/javascript">
+
+        const texto = "estring"
+        const arreglo = ['asdf','qwer']
+        const funsion = function(){}
+        const objecto = {
+            "propiedad" : "datos"
+        }
+
+        // dunde proto
+            console.log('texto::', texto.__proto__)
+            console.log('arreglo::', arreglo.__proto__)
+            console.log('funcion', funsion.prototype.__proto__)
+            console.log('objeto::', objecto.__proto__)
+
+
+        class Persona {
+            constructor(nombre) {
+                this.nombre = nombre
+            }
+            saludar() {
+                console.log(`hola ${this.nombre} 👋`)
+            }
+        }
+            const asdf = new Persona('nombre aqui')
+
+            console.log('Persona::', asdf)
+            asdf.saludar()
+            
+
+            asdf.__proto__.saludar = (zxcv) => {
+                console.log(`reescrito en clase ${zxcv} 😮`)
+            }
+            asdf.saludar('zxcv')
+            console.log(asdf)
+            
+
+            asdf.saludar = (qwer) => {
+                console.log(`nel ${qwer} 😠 - Methodo modificado afuera`)
+            }
+            asdf.saludar('asdf')
+            console.log(asdf)
+            
+        let arreglo2 = []
+        arreglo2.__proto__ = asdf
+        console.log('Arreglo hereda la funcion dela clase',arreglo2)
+
+        arreglo2.saludar('saludar desde arreglo')
+        arreglo2.__proto__.__proto__.saludar('desde el arrelgo >:D')
+    </script>
+</body>
+
+</html>
