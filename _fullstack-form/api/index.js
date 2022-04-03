@@ -5,8 +5,18 @@ const app = express();
 const port = 666;
 
 let transactionArray = [
-    { transactionDescription: 'Lorem Ipsum', transactionPrice: '1' },
-    { transactionDescription: 'Dolor Sit Amet', transactionPrice: '2' },
+    {
+        transactionTitle: 'Lorem Ipsum',
+        transactionDescription: 'Dolor Sit Amet',
+    },
+    {
+        transactionTitle: 'consectetur adipiscing elit',
+        transactionDescription: 'Pellentesque ac mi a mauris aliquet dictum',
+    },
+    {
+        transactionTitle: 'Cras id justo eget arcu malesuada',
+        transactionDescription: 'maximus Orci varius natoque penatibus et magnis',
+    },
 ];
 
 app.use(
