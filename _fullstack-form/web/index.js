@@ -33,14 +33,25 @@ const parseData = (data) => {
 
     const estosDatos = data.map((e, i) => {
         let template = `
-        <div class="mt-3" id="section-${i}">
+        <div class="mt-3" id="${i}">
             <h3>${e.transactionTitle}</h3>
             <h4>${e.transactionDescription}</h4>
+            <!-- <button class="delete-section btn btn-xs btn-danger">Delete</button> -->
         </div>`;
-        return template
+        return template;
     });
 
-    content.innerHTML = estosDatos.join('')
+    content.innerHTML = estosDatos.join('');
+
+    // Delete
+    let deleteButtons = document.querySelectorAll('.delete-section');
+    deleteButtons.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            const id = btn.parentElement.id
+
+            console.log(data[id])
+        })
+    });
 };
 
 getDataTodos();
