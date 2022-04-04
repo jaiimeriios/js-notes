@@ -15,7 +15,10 @@ forma.addEventListener('submit', (e) => {
     title.value = '';
 
     fetch('http://localhost:666/todos', {
-        method: 'post',
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
         body: todoJSON,
     });
 
