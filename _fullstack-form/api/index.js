@@ -4,18 +4,18 @@ const express = require('express');
 const app = express();
 const port = 666;
 
-let transactionArray = [
+let todoArray = [
     {
-        transactionTitle: 'Lorem Ipsum',
-        transactionDescription: 'Dolor Sit Amet',
+        todoTitle: 'Lorem Ipsum',
+        todoDescription: 'Dolor Sit Amet',
     },
     {
-        transactionTitle: 'consectetur adipiscing elit',
-        transactionDescription: 'Pellentesque ac mi a mauris aliquet dictum',
+        todoTitle: 'consectetur adipiscing elit',
+        todoDescription: 'Pellentesque ac mi a mauris aliquet dictum',
     },
     {
-        transactionTitle: 'Cras id justo eget arcu malesuada',
-        transactionDescription: 'maximus Orci varius natoque penatibus et magnis',
+        todoTitle: 'Cras id justo eget arcu malesuada',
+        todoDescription: 'maximus Orci varius natoque penatibus et magnis',
     },
 ];
 
@@ -38,16 +38,16 @@ app.get('/', (req, res) => {
 });
 
 // GET - regresar datos a frontend
-app.get('/transactions', (req, res) => {
-    res.send(JSON.stringify(transactionArray));
+app.get('/todos', (req, res) => {
+    res.send(JSON.stringify(todoArray));
 });
 
 // POST - guardar cosas a backend
-app.post('/transactions', (req, res) => {
-    let transaction = req.body;
-    transactionArray.push(transaction);
+app.post('/todos', (req, res) => {
+    let todos = req.body;
+    todoArray.push(todos);
     res.send(JSON.stringify('Guardado'));
-    console.log(transactionArray);
+    console.log(todoArray);
 });
 
 app.listen(port, () => {
