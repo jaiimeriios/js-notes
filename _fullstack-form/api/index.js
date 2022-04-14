@@ -50,6 +50,10 @@ app.post('/todos', (req, res) => {
     console.log(todoArray);
 });
 
+// app.delete('/todos', (req, res) => {
+//     res.send('Got a DELETE request at /todos')
+// })
+
 app.listen(port, () => {
     console.log(`Ejecutandose en http://localhost:${port}`);
 });

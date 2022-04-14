@@ -39,7 +39,7 @@ const parseData = (data) => {
         <div class="mt-3" id="${i}">
             <h3>${e.todoTitle}</h3>
             <h4>${e.todoDescription}</h4>
-            <!-- <button class="delete-section btn btn-xs btn-danger">Delete</button> -->
+            <button class="delete-section btn btn-xs btn-danger">Delete</button>
         </div>`;
         return template;
     });
@@ -50,9 +50,24 @@ const parseData = (data) => {
     let deleteButtons = document.querySelectorAll('.delete-section');
     deleteButtons.forEach((btn) => {
         btn.addEventListener('click', (e) => {
-            const id = btn.parentElement.id
 
-            console.log(data[id])
+            // const id = btn.parentElement.id
+            // const filteredTodos = data.filter((todo) => {
+            //     return todo.todoTitle !== data[id].todoTitle
+            // })
+
+            // filteredTodosJSON = JSON.stringify(filteredTodos);
+            
+            // console.log(filteredTodos)
+            // console.log(filteredTodosJSON)
+
+            // fetch('http://localhost:666/todos', {
+            //     method: 'DELETE',
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: filteredTodosJSON,
+            // });
         })
     });
 };
