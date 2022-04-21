@@ -4,14 +4,14 @@ import { v4 as uuid } from 'uuid';
 
 let users = [
     {
-        firstName: 'Lorem',
-        lastName: 'Ipsum',
+        firstName: 'TODO',
+        lastName: 'Lorem Ipsum',
         age: '20',
         id: uuid(),
     },
     {
-        firstName: 'Dolor',
-        lastName: 'Sit Amet',
+        firstName: 'TODO',
+        lastName: 'Dolor Sit Amet',
         age: '30',
         id: uuid(),
     },
@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     const user = req.body;
     users.push({ ...user, id: uuid() });
-    console.log('USER ADDED::', users);
+    console.log('USER ADDED::', user);
 });
 
 // Delte user
