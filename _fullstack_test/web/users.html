@@ -31,13 +31,33 @@
                     <input id="user-last-name" class="form-control" type="text">
                 </div>
                 <div class="mb-3">
-                    <label for="user-age" class="form-label">Age</label>
-                    <input id="user-age" class="form-control" type="text">
+                    <label for="user-email" class="form-label">Email</label>
+                    <input id="user-email" class="form-control" type="text">
+                </div>
+                <div class="mb-3">
+                    <label for="user-handle" class="form-label">Handle</label>
+                    <input id="user-handle" class="form-control" type="text">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
-        <div id="content" class="row"></div>
+
+        <div class="table-responsive mt-4">
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Last</th>
+                        <th>Email</th>
+                        <th>Handle</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="content">
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script src="users.js"></script>

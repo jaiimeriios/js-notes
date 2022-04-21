@@ -7,13 +7,15 @@ let users = [
     {
         firstName: 'Lorem',
         lastName: 'Ipsum',
-        age: '20',
+        email: 'asdf@asdf.com',
+        handle: 'asdf',
         id: uuid(),
     },
     {
         firstName: 'Dolor',
         lastName: 'Sit Amet',
-        age: '30',
+        email: 'zxcv@zxcv.com',
+        handle: 'zxcv',
         id: uuid(),
     },
 ];
@@ -32,43 +34,58 @@ router.get('/:id', (req, res) => {
         return user.id === req.params.id;
     });
     res.send(foundUser);
+    console.log(chalk.bgYellow('adsfsdaf'))
 });
 
 // Create a user
 router.post('/', (req, res) => {
     const user = req.body;
     users.push({ ...user, id: uuid() });
-
-    console.log(chalk.bgBlue('USER ADDED::', user.firstName, user.lastName));
+    console.log(chalk.bgGreen(
+        'USER ADDED::', user.firstName, user.lastName, user.email, user.handle
+    ));
 });
 
 // Delte user
 router.delete('/:id', (req, res) => {
-    // console.log('deleteee');
     // console.log(req.body);
-    console.log(`user with id ${req.params.id} has been deleted`);
     users = users.filter((user) => {
         return user.id !== req.params.id;
     });
+    console.log(chalk.bgRed(
+        `user with id ${req.params.id} has been deleted`
+    ));
 });
 
 // Updated user
 router.put('/:id', (req, res) => {
-    const { firstName, lastName, age } = req.body;
+    const { firstName, lastName, email, handle } = req.body;
     const user = users.find((user) => {
         return user.id === req.params.id;
     })
     if (firstName) {
         user.firstName = firstName;
-        console.log(`First name has been updated to --${req.body.firstName}`)
+        console.log(chalk.bgBlue(
+            `First name has been updated to --${req.body.firstName}`
+        ))
     }
     if (lastName) {
         user.lastName = lastName;
-        console.log(`Last name has been updated to --${req.body.lastName}`)
+        console.log(chalk.bgBlue(
+            `Last name has been updated to --${req.body.lastName}`
+        ))
     }
-    if (age) {
-        user.age = age;
-        console.log(`User Age has been updated to --${req.body.age}`)
+    if (email) {
+        user.email = email;
+        console.log(chalk.bgBlue(
+            `User email has been updated to --${req.body.email}`
+        ))
+    }
+    if (handle) {
+        user.handle = handle;
+        console.log(chalk.bgBlue(
+            `User email has been updated to --${req.body.handle}`
+        ))
     }
 });
 
