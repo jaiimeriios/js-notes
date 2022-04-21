@@ -1,6 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import { v4 as uuid } from 'uuid';
+import chalk from 'chalk';
 
 let users = [
     {
@@ -37,7 +38,8 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     const user = req.body;
     users.push({ ...user, id: uuid() });
-    console.log('USER ADDED::', user);
+
+    console.log(chalk.bgBlue('USER ADDED::', user.firstName, user.lastName));
 });
 
 // Delte user

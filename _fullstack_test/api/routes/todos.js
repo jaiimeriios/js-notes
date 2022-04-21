@@ -1,6 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import { v4 as uuid } from 'uuid';
+import chalk from 'chalk';
 
 let users = [
     {
