@@ -4,14 +4,14 @@ import { v4 as uuid } from 'uuid';
 
 let users = [
     {
-        firstName: 'asdf',
-        lastName: 'qwer',
+        firstName: 'Lorem',
+        lastName: 'Ipsum',
         age: '20',
         id: uuid(),
     },
     {
-        firstName: 'zxcv',
-        lastName: '1234',
+        firstName: 'Dolor',
+        lastName: 'Sit Amet',
         age: '30',
         id: uuid(),
     },
@@ -51,29 +51,23 @@ router.delete('/:id', (req, res) => {
 });
 
 // Updated user
-router.patch('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     const { firstName, lastName, age } = req.body;
     const user = users.find((user) => {
         return user.id === req.params.id;
-    });
-
+    })
     if (firstName) {
         user.firstName = firstName;
+        console.log(`First name has been updated to --${req.body.firstName}`)
     }
     if (lastName) {
         user.lastName = lastName;
+        console.log(`Last name has been updated to --${req.body.lastName}`)
     }
     if (age) {
         user.age = age;
+        console.log(`User Age has been updated to --${req.body.age}`)
     }
-
-    // user.firstName = req.body.firstName;
-    // user.lastName = req.body.firstName;
-    // user.age = req.body.age;
-
-    console.log(
-        `username has been updated to ${req.body.firstName}.age has been updated to ${req.body.firstName}`
-    );
 });
 
 export default router;
