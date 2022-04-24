@@ -104,8 +104,6 @@ document.getElementById('users-form').addEventListener('submit', (e) => {
     }, 100);
 });
 
-const editable = (e, isEditable) => {};
-
 // editable
 const editUser = () => {
     document.querySelectorAll('.edit-button').forEach((btn) => {

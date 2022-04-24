@@ -34,7 +34,7 @@ router.get('/:id', (req, res) => {
         return user.id === req.params.id;
     });
     res.send(foundUser);
-    console.log(chalk.bgYellow('adsfsdaf'))
+    console.log(chalk.bgYellow(`user requested:: ${foundUser.firstName}`))
 });
 
 // Create a user
