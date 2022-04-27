@@ -7,8 +7,7 @@ const showData = (data) => {
             <p>${e.description}</p>
             <div class="form-check form-switch d-none">
                 <input class="form-check-input" type="checkbox"
-                data-checked="${e.important}" data-id="${e.id}"
-                >
+                data-checked="${e.important}" data-id="${e.id}">
             </div>
             <button data-id="${e.id}" class="edit-button btn btn-xs btn-primary">
                 Edit
