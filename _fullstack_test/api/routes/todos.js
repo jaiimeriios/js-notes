@@ -3,71 +3,93 @@ const router = express.Router();
 import { v4 as uuid } from 'uuid';
 import chalk from 'chalk';
 
-let users = [
+let todos = [
     {
-        firstName: 'TODO',
-        lastName: 'Lorem Ipsum',
-        age: '20',
+        title: 'Lorem ipsum dolor sit amet',
+        description: 'consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh praesent tristique magna sit amet purus gravida quis blandit. Nibh sit amet commodo nulla',
+        important: true,
         id: uuid(),
     },
     {
-        firstName: 'TODO',
-        lastName: 'Dolor Sit Amet',
-        age: '30',
+        title: 'Sit amet nulla facilisi',
+        description: 'morbi tempus iaculis urna id volutpat. Ut tortor pretium viverra suspendisse potenti nullam ac tortor',
+        important: false,
         id: uuid(),
     },
 ];
 
-// Find all users
+
+
+/*
+    Request:    From Client to Server
+    Response:   From Server to Client
+    Server:     Receive Request and Send Response
+    Client:     Send Request and Receive Response
+*/
+
+
+
+// Find all todos
 router.get('/', (req, res) => {
-    res.send(users);
-    // console.log(users)
+    res.send(todos);
+    // console.log(todos)
 });
 
-// Find user details
+// Find todo details
 router.get('/:id', (req, res) => {
     // console.log(req.params)
     // const { id } = req.params
-    const foundUser = users.find((user) => {
-        return user.id === req.params.id;
+    const foundTodo = todos.find((todo) => {
+        return todo.id === req.params.id;
     });
-    res.send(foundUser);
+    res.send(foundTodo);
+    console.log(chalk.bgYellow(`user requested:: ${foundTodo.title}`))
 });
 
-// Create a user
+// Create a todo
 router.post('/', (req, res) => {
-    const user = req.body;
-    users.push({ ...user, id: uuid() });
-    console.log('USER ADDED::', user);
+    const todo = req.body;
+    todos.push({ ...todo, id: uuid() });
+    console.log(chalk.bgGreen(
+        `TODO ADDED:: ${todo.title} ${todo.description} ${todo.important}`
+    ));
 });
 
-// Delte user
+// Delte todo
 router.delete('/:id', (req, res) => {
     // console.log('deleteee');
     // console.log(req.body);
-    console.log(`user with id ${req.params.id} has been deleted`);
-    users = users.filter((user) => {
-        return user.id !== req.params.id;
+    todos = todos.filter((todo) => {
+        return todo.id !== req.params.id;
     });
+    console.log(chalk.bgRed(
+        `TODO DELETED:: ${req.params.id}`
+    ));
 });
 
-// Updated user
+// Updated todo
 router.put('/:id', (req, res) => {
-    const { firstName, lastName, age } = req.body;
-    const user = users.find((user) => {
-        return user.id === req.params.id;
+    const { title, description, important } = req.body;
+    const todo = todos.find((todo) => {
+        return todo.id === req.params.id;
     })
-    if (firstName) {
-        user.firstName = firstName;
-        console.log(`First name has been updated to --${req.body.firstName}`)
+    if (title) {
+        todo.title = title;
+        console.log(chalk.bgBlue(
+            `New Title:: ${req.body.title}`
+        ))
     }
-    if (lastName) {
-        user.lastName = lastName;
-        console.log(`Last name has been updated to --${req.body.lastName}`)
+    if (description) {
+        todo.description = description;
+        console.log(chalk.bgBlue(
+            `New Description:: ${req.body.description}`
+        ))
     }
-    if (age) {
-        user.age = age;
-        console.log(`User Age has been updated to --${req.body.age}`)
+    if (important) {
+        todo.important = important;
+        console.log(chalk.bgBlue(
+            `Important:: ${req.body.important}`
+        ))
     }
 });
 

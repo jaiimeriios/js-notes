@@ -1,6 +1,6 @@
 body {
     color: #fff;
-    background-color: #111c28;
+    background-color: #202a34;
 }
 /* Forma */
 form {
@@ -45,4 +45,36 @@ table tbody tr td:nth-child(6) {
 table tr td .btn {
     font-size: 0.85rem;
     padding: 0.2rem 0.35rem;
+}
+
+
+
+/* todo */
+
+#todo-description {
+    min-height: 100px;
+    max-height: 300px;
+}
+
+
+.todo-section [contenteditable='true']{
+    border: solid 2px #c9a32e;
+    outline: none;
+    border-radius: 0.2rem;
+}
+.todo-section [contenteditable='true']:active,
+.todo-section [contenteditable='true']:focus {
+    border-color: #2a80ff;
+}
+
+
+.todo-section {
+
+}
+.todo-section.important-true {
+    background-color: green;
+
+}
+.todo-section.important-false {
+    background-color: red;
 }
