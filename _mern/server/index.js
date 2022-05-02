@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
@@ -12,8 +13,12 @@ const PORT = 666;
 app.use(cors());
 app.use(bodyParser.json());
 
-const dbName = 'mern_test';
-const mernTestDB = `mongodb+srv://Username123:Password123@testdb.g6sqj.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+
+const dbName = process.env.DB_NAME;
+const dbUser = process.env.DB_USERNAME;
+const dbPassword = process.env.DB_PASSWORD;
+
+const mernTestDB = `mongodb+srv://${dbUser}:${dbPassword}@testdb.g6sqj.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
 mongoose.connect(mernTestDB, {
         useNewUrlParser: true,
