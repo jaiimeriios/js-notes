@@ -15,6 +15,10 @@ const UsersSchema = new mongoose.Schema({
     },
 });
 
+
+// 'users' is the name of the collection on mongoDB
+// 'UsersSchema' is the object that mirrors the collection
+
 const UsersModel = mongoose.model('users', UsersSchema);
 
 export default UsersModel;

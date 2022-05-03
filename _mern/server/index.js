@@ -36,13 +36,15 @@ app.get('/', (req, res) => {
         <h1>Home Page - Users API!</h1>
         <br>
         <a href="users">Users</a>
+        <br><br>
+        <a href="todos">Todos</a>
     `);
 });
+
 
 // ROUTES
 app.use('/users', usersRoutes);
 app.use('/todos', todosRoutes);
-
 
 
 app.all('*', (req, res) => {

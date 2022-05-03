@@ -15,6 +15,10 @@ const TodosSchema = new mongoose.Schema({
     },
 });
 
+
+// 'todos' is the name of the collection on mongoDB
+// 'TodosSchema' is the object that mirrors the collection
+ 
 const TodosModel = mongoose.model('todos', TodosSchema);
 
 export default TodosModel;
