@@ -1,4 +1,4 @@
-import 'dotenv/config'
+import 'dotenv/config';
 import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
@@ -13,14 +13,14 @@ const PORT = 666;
 app.use(cors());
 app.use(bodyParser.json());
 
-
 const dbName = process.env.DB_NAME;
 const dbUser = process.env.DB_USERNAME;
 const dbPassword = process.env.DB_PASSWORD;
 
 const mernTestDB = `mongodb+srv://${dbUser}:${dbPassword}@testdb.g6sqj.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
-mongoose.connect(mernTestDB, {
+mongoose
+    .connect(mernTestDB, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
@@ -33,7 +33,7 @@ console.clear();
 // HOME
 app.get('/', (req, res) => {
     res.send(`
-        <h1>Home Page - Users API!</h1>
+        <h1>Home Page - MongoDB API!</h1>
         <br>
         <a href="users">Users</a>
         <br><br>
@@ -41,16 +41,17 @@ app.get('/', (req, res) => {
     `);
 });
 
-
 // ROUTES
 app.use('/users', usersRoutes);
 app.use('/todos', todosRoutes);
-
 
 app.all('*', (req, res) => {
     res.send("You've tried reaching a route that doesn't exist.");
 });
 
 app.listen(PORT, () => {
-    console.log('Server running on port:', chalk.bgGreen(` http://localhost:${PORT} `));
+    console.log(
+        'Server running on port:',
+        chalk.bgGreen(` http://localhost:${PORT} `)
+    );
 });
