@@ -32,14 +32,10 @@ export const workoutsReducer = (state, action) => {
                 workouts: state.workouts.filter((w) => w._id !== action.payload._id)
             }
         case 'PATCH_WORKOUT':
-
-
             const patchObject = state.workouts.find(arrayItem => {
                 return arrayItem._id === action.payload._id
             });
-
             Object.assign(patchObject, action.payload);
-
             return {
                 workouts: state.workouts
             }

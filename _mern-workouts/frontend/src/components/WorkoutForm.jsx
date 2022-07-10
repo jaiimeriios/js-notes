@@ -25,9 +25,7 @@ const WorkoutForm = () => {
         });
 
         const json = await response.json();
-
-        // console.log(json)
-        
+      
         if (!response.ok) {
             setError(json.error);
             setEmptyFields(json.emptyFields)
@@ -75,7 +73,7 @@ const WorkoutForm = () => {
 
                 <button>Add</button>
 
-                {error && <div className="error">{error}</div>}
+                {error && <div className="error-message">{error}</div>}
             </form>
         </div>
     );

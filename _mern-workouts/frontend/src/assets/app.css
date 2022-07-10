@@ -149,78 +149,6 @@ nav a:hover {
     }
 }
 
-.workout-details {
-    position: relative;
-    border-radius: 0.25rem;
-    margin: 0 auto 1rem auto;
-    padding: 1rem;
-    border: solid 1px rgba(255, 255, 255, 0.075);
-    background-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 2px 2px 8px 2px rgb(0, 0, 0, 0.2);
-    transition: all 200ms ease-in;
-}
-.workout-details:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.workout-details h4 {
-    margin: 0 0 10px 0;
-    font-size: 1.55em;
-    color: var(--primary);
-}
-
-.workout-details p {
-    margin: 0 0 0.5rem 0;
-    font-size: 0.9em;
-    color: #fff;
-}
-
-
-
-
-
-.workout-details span {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: .5rem;
-    color: #ebe1e1;
-    border: none;
-    -webkit-user-select: none;
-    user-select: none;
-    font-size: .75rem;
-    letter-spacing: .05rem;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.08);
-    transition: all 100ms ease-in;
-    /* opacity: 0; */
-}
-
-.workout-details span.edit {
-    background-color: #2963cd;
-    right: 90px;
-}
-.workout-details span.delete {
-    background-color: #9f3636;
-    right: 20px;
-}
-
-.workout-details:hover span {
-    opacity: 1;
-}
-
-.workout-details button.update {
-    position: relative;
-    display: block;
-    width: fit-content;
-    right: 0;
-    top: 0;
-    margin: 0 auto;
-    padding: 5px 20px;
-    background-color: var(--primary);
-}
-
 /* FORM */
 .forma > form {
     border-radius: 0.25rem;
@@ -265,12 +193,123 @@ nav a:hover {
     display: block;
 }
 
-div.error {
-    padding: 10px;
-    background: #ffefef;
-    border: 1px solid var(--error);
-    color: var(--error);
-    border-radius: 4px;
-    margin: 20px 0;
+div.error-message {
+    padding: 10px 0;
+    background-color: #9b2c3b;
+    border: 1px solid #b14747;
+    color: #ffffff;
+    border-radius: .25rem;
+    margin: 20px 0 0 0;
+    text-align: center;
 }
 
+
+/* Details */
+.workout-details {
+    position: relative;
+    border-radius: 0.25rem;
+    margin: 0 auto 1rem auto;
+    padding: 1rem;
+    border: solid 1px rgba(255, 255, 255, 0.075);
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 2px 2px 8px 2px rgb(0, 0, 0, 0.2);
+    transition: all 200ms ease-in;
+}
+.workout-details:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.workout-details h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.55em;
+    color: var(--primary);
+}
+
+.workout-details p {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9em;
+    color: #fff;
+}
+
+.workout-details span {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: .5rem;
+    color: #ebe1e1;
+    border: none;
+    -webkit-user-select: none;
+    user-select: none;
+    font-size: .75rem;
+    letter-spacing: .05rem;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.08);
+    transition: all 100ms ease-in;
+    opacity: 0;
+}
+
+.workout-details span.edit {
+    background-color: #2963cd;
+    right: 90px;
+}
+.workout-details span.delete {
+    background-color: #9f3636;
+    right: 20px;
+}
+
+.workout-details:hover span {
+    opacity: 1;
+}
+
+.workout-details button.update {
+    position: relative;
+    display: block;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 15px auto 0 auto;
+    padding: 5px 20px;
+    font-size: 1rem;
+    letter-spacing: .015rem;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: .25rem;
+    background-color: var(--primary);
+}
+.workout-details button.update:hover {
+    background-color: #00c990;
+}
+
+.workout-details.edit-details {
+    border: solid 1px #919de35c;
+    background-color: rgb(119 185 237 / 23%);
+}
+
+.workout-details .edit-section {
+    display: flex;
+    align-items: center;
+    margin: 0 0 10px 0;
+}
+
+.workout-details .edit-section label {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    min-width: 60px;
+    letter-spacing: .05rem;
+}
+
+.workout-details .edit-section input {
+    display: block;
+    font-size: 1rem;
+    padding: 6px;
+    border-radius: .25rem;
+    border: solid 2px #0e344c;
+    margin: 0;
+    outline: none;
+}
+
+.workout-details .edit-section input:focus {
+    border: 2px solid var(--primary)
+}

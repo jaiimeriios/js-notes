@@ -8,7 +8,7 @@ function App() {
     return (
         <div className="app">
             <BrowserRouter>
-                <Header title="TEST" />
+                <Header title="MERN APP" />
                 <div className="pages">
                     <Routes>
                         <Route path="/" element={<Home />} />

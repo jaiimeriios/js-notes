@@ -5,31 +5,31 @@ import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 const WorkoutsDetails = ({ workout }) => {
-
-    const { workouts, dispatch } = useWorkoutsContext();
-
+    const { dispatch } = useWorkoutsContext();
+    const [edit, setEdit] = useState(false);
+    const [error, setError] = useState(false);
     const [title, setTitle] = useState('');
     const [reps, setReps] = useState('');
     const [load, setLoad] = useState('');
 
-    const [edit, setEdit] = useState(false);
-
     const toggleEditMode = () => {
         setEdit(true);
+        setTitle(workout.title);
+        setReps(workout.reps);
+        setLoad(workout.load);
     };
 
     // PATCH
     const handlePatch = async (e) => {
         e.preventDefault();
+        setError(false);
+        let _id = workout._id;
+        let patchWorkout = { title, reps, load, _id };
 
-        let _id = workout._id
-        
-        let patchWorkout = { title, reps, load, _id }
-
-        // console.log(patchWorkout);
-        // console.log(workout);
-        // console.log(workouts);
-
+        if (title === '' || reps === '' || load === '') {
+            setError(true);
+            return;
+        }
         const response = await fetch(`workouts/${workout._id}`, {
             method: 'PATCH',
             headers: {
@@ -37,18 +37,15 @@ const WorkoutsDetails = ({ workout }) => {
             },
             body: JSON.stringify(patchWorkout),
         });
-
-        // const json = await response.json();
-   
         if (!response.ok) {
-            console.log('error')
+            console.log('error');
         }
         if (response.ok) {
-            dispatch({ type: 'PATCH_WORKOUT', payload: patchWorkout })
+            dispatch({ type: 'PATCH_WORKOUT', payload: patchWorkout });
         }
         setEdit(false);
     };
-    
+
     // DELETE
     const handleDelete = async () => {
         const response = await fetch(`workouts/${workout._id}`, {
@@ -64,62 +61,67 @@ const WorkoutsDetails = ({ workout }) => {
     };
 
     return (
-        <form className="workout-details" onSubmit={handlePatch}>
+        <div className={`workout-details ${edit && 'edit-details'}`}>
             {edit ? (
-                <input
-                    type="text"
-                    onChange={(e) => setTitle(e.target.value)}
-                    // value={workout.title}
-                />
-            ) : (
-                <h4>{workout.title}</h4>
-            )}
-            {edit ? (
-                <input
-                    type="number"
-                    onChange={(e) => setReps(e.target.value)}
-                    // value={workout.reps}
-                />
-            ) : (
-                <p>
-                    <b>Reps</b> {workout.reps}
-                </p>
-            )}
-            {edit ? (
-                <input
-                    type="number"
-                    onChange={(e) => setLoad(e.target.value)}
-                    // value={workout.load}
-                />
-            ) : (
-                <p>
-                    <b>Load (lb)</b> {workout.load}
-                </p>
-            )}
-            <p>
-                {formatDistanceToNow(new Date(workout.createdAt), {
-                    addSuffix: true,
-                })}
-            </p>
+                <form onSubmit={handlePatch}>
+                    <div className="edit-section">
+                        <label>Title</label>
+                        <input
+                            type="text"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                    </div>
 
-            {edit ? (
-                ''
+                    <div className="edit-section">
+                        <label>Reps</label>
+                        <input
+                            type="number"
+                            value={reps}
+                            onChange={(e) => setReps(e.target.value)}
+                        />
+                    </div>
+
+                    <div className="edit-section">
+                        <label>Load</label>
+                        <input
+                            type="number"
+                            value={load}
+                            onChange={(e) => setLoad(e.target.value)}
+                        />
+                    </div>
+                    <button className="update" onClick={handlePatch}>
+                        Update
+                    </button>
+                    {error && (
+                        <div className="error-message">
+                            All field required
+                        </div>
+                    )}
+                </form>
             ) : (
-                <span className="edit" onClick={toggleEditMode}>
-                    Edit
-                </span>
+                <>
+                    <h4>{workout.title}</h4>
+                    <p>
+                        <b>Reps</b> {workout.reps}
+                    </p>
+                    <p>
+                        <b>Load (lb)</b> {workout.load}
+                    </p>
+                    <p>
+                        {formatDistanceToNow(new Date(workout.createdAt), {
+                            addSuffix: true,
+                        })}
+                    </p>
+                    <span className="edit" onClick={toggleEditMode}>
+                        Edit
+                    </span>
+                    <span className="delete" onClick={handleDelete}>
+                        Delete
+                    </span>
+                </>
             )}
-            <span className="delete" onClick={handleDelete}>
-                Delete
-            </span>
-            {edit ? (
-                <button className="update" onClick={handlePatch}>
-                    Update
-                </button>
-            ) : (
-                ''
-            )}
-        </form>
+        </div>
     );
 };
 
