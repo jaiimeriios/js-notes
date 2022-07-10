@@ -40,7 +40,7 @@ const WorkoutForm = () => {
             setError(null);
             setEmptyFields([])
             dispatch({ type: 'CREATE_WORKOUT', payload: json })
-            // console.log('new added', json);
+            console.log('new added', json);
         }
     };
 

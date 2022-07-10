@@ -175,12 +175,15 @@ nav a:hover {
     color: #fff;
 }
 
-.workout-details button {
+
+
+
+
+.workout-details span {
     position: absolute;
     top: 20px;
     right: 20px;
     cursor: pointer;
-    background-color: #9f3636;
     padding: 5px 10px;
     border-radius: .5rem;
     color: #ebe1e1;
@@ -191,11 +194,31 @@ nav a:hover {
     letter-spacing: .05rem;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.08);
     transition: all 100ms ease-in;
-    opacity: 0;
+    /* opacity: 0; */
 }
 
-.workout-details:hover button {
+.workout-details span.edit {
+    background-color: #2963cd;
+    right: 90px;
+}
+.workout-details span.delete {
+    background-color: #9f3636;
+    right: 20px;
+}
+
+.workout-details:hover span {
     opacity: 1;
+}
+
+.workout-details button.update {
+    position: relative;
+    display: block;
+    width: fit-content;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+    padding: 5px 20px;
+    background-color: var(--primary);
 }
 
 /* FORM */
